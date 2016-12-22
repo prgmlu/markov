@@ -1,0 +1,25 @@
+import anytree
+from anytree import Node
+def stringToTree(S,ref):
+	S=S.split(' ')
+	prev=ref
+	
+	for name in range(1,len(S)):
+		found=0	
+		for node in prev.children:
+			if node.name==S[name]:
+				prev=node
+				found=1
+				break
+
+		if found==0:
+			prev=Node(S[name],parent=prev)
+
+
+
+def getLeaves(ref):
+	leaves=[node for node in anytree.PostOrderIter(ref) if node.is_leaf]
+	return leaves
+
+
+def setProbabilityFromSiblings()
