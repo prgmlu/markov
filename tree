@@ -5,14 +5,12 @@ def stringToTree(S,ref):
 	prev=ref
 	
 	for name in range(1,len(S)):
-		found=0	
-		for node in prev.children:
-			if node.name==S[name]:
-				prev=node
-				found=1
-				break
-
-		if found==0:
+		if any(node.name==S[name] for node in prev.children):
+			for node in prev.children:
+				if node.name==S[name]:
+					prev=node
+					break
+		else:
 			prev=Node(S[name],parent=prev)
 
 
@@ -22,4 +20,31 @@ def getLeaves(ref):
 	return leaves
 
 
-def setProbabilityFromSiblings()
+
+def setProbFromSibs(node):
+	sum=node.count
+	for sib in node.siblings:
+		sum+=sib.count
+	node.prob=node.count/(sum*1.0)
+
+
+def setRealProb(node):
+	goal=node
+	path=[]
+	current=node
+	while True:
+		if hasattr(current.parent,"realProb"):
+			setattr(current,"realProb",current.prob*current.parent.realProb)
+			print current.parent.name
+			if current==goal:
+				return
+			else:
+				
+				for n in reversed(path):
+					n.realProb=current.realProb*n.prob
+					current=n
+			return					
+		else:
+			path.append(current)
+			current=current.parent
+			
