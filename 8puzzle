@@ -1,0 +1,54 @@
+import anytree
+from anytree import RenderTree,Node
+dct={}
+
+goal=[1,2,3,8,0,4,7,6,5]
+
+def isGoal(ref):
+	if ref.state==goal:
+		return True
+	else:
+		return False
+
+def getMoves(ref):
+	moves=[]
+	indices=[]
+	for i in range(0,9):
+		if ref.state[i]==0:
+			index=i
+			break
+	indices.extend((index+1,index-1,index+3,index-3))
+	indices=filter(lambda x:x>-1 and x<9,indices)
+	for j in indices:
+		temp_state=list(ref.state)
+		temp_state[j]=0
+		temp_state[index]=ref.state[j]
+		moves.append(temp_state)
+	return moves
+
+def expand(ref):
+	global dict
+	node=ref
+	moves=getMoves(node)
+	queue=[]
+	for move in moves:
+		print len(moves)
+		print 'hi'
+		print move	
+		kid=Node('.',parent=node,state=str(move))
+		type (kid.state)
+		type (kid)
+		dum=' '.join(kid.state)
+		if dum in dict:
+			queue.append(kid)
+			dict[str(kid.state)]=1
+	node=queue.pop(0)
+	if isGoal(node):
+		return 'found'
+	moves=getMoves(node)
+
+
+
+
+
+
