@@ -1,54 +1,87 @@
+d={}
+q=[]
+
 import anytree
 from anytree import RenderTree,Node
-dct={}
 
 goal=[1,2,3,8,0,4,7,6,5]
 
-def isGoal(ref):
-	if ref.state==goal:
+def isGoal(state):
+	if state==goal:
 		return True
 	else:
 		return False
 
-def getMoves(ref):
+def getMoves(state):
 	moves=[]
 	indices=[]
 	for i in range(0,9):
-		if ref.state[i]==0:
+		if state[i]==0:
 			index=i
 			break
 	indices.extend((index+1,index-1,index+3,index-3))
 	indices=filter(lambda x:x>-1 and x<9,indices)
 	for j in indices:
-		temp_state=list(ref.state)
+		temp_state=list(state)
 		temp_state[j]=0
-		temp_state[index]=ref.state[j]
+		temp_state[index]=state[j]
 		moves.append(temp_state)
 	return moves
 
-def expand(ref):
-	global dict
-	node=ref
-	moves=getMoves(node)
-	queue=[]
-	for move in moves:
-		print len(moves)
-		print 'hi'
-		print move	
-		kid=Node('.',parent=node,state=str(move))
-		type (kid.state)
-		type (kid)
-		dum=' '.join(kid.state)
-		if dum in dict:
-			queue.append(kid)
-			dict[str(kid.state)]=1
-	node=queue.pop(0)
-	if isGoal(node):
-		return 'found'
-	moves=getMoves(node)
+
+def breadth(ref):
+	global q
+	global d
+	odd=0
+	pointer=0
+	d[tuple(ref.state)]=1
+	q.append(ref)
+	
+	while True:
+		if(isGoal(q[pointer].state)):
+			return
+		moves=getMoves(q[pointer].state)
+		for move in moves:
+			if(isGoal(move)):
+				return
+			if tuple(move) in d.values() or tuple(move) in d.keys():
+				' '
+			else:
+				n=Node(' ',parent=q[pointer],state=move)
+				d[tuple(move)]=1
+				q.append(n)
+		if odd%2==0:
+			pointer=pointer+1
+		q[pointer:]=sorted(q[pointer:],key=lambda x:heur(x.state))
+		print min(map(lambda x:heur(x.state),q))
+		print max(map(lambda x:heur(x.state),q))
+		odd+=1
 
 
 
+def heur(state):
+	sum=0
+	for i in range(9):
 
+		if state[i]==1:
+			sum+=[0,1,2,1,2,3,2,3,4][i]
+		if state[i]==5:
+			sum+=[4,3,2,3,2,1,2,1,0][i]
+		if state[i]==2:
+			sum+=[1,0,1,2,1,2,3,2,3][i]
+		if state[i]==6:
+			sum+=[3,2,3,2,1,2,1,0,1][i]
+		if state[i]==0:
+			sum+=[2,1,2,1,0,1,2,1,2][i]
+		if state[i]==3:
+			sum+=[2,1,0,3,2,1,4,3,2][i]
+		if state[i]==7:
+			sum+=[2,3,4,1,2,3,0,1,2][i]
+		if state[i]==4:
+			sum+=[3,2,1,2,1,0,3,2,1][i]
+		if state[i]==8:
+			sum+=[1,2,3,0,1,2,1,2,3][i]
+
+	return sum
 
 
