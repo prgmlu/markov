@@ -1,0 +1,51 @@
+#!/bin/bash
+#manually:
+#you will need to get the bash script and run it by writing the command:
+#bash script
+#but running it after doing those:
+#
+#sudo apt-add-repository universe
+#sudo apt-update
+#git
+
+#(git clone )
+
+install='sudo apt-get install'
+
+
+yes | $install pip
+yes | $install r-base
+
+
+echo | sudo add-apt-repository ppa:webupd8team/sublime-text-3
+sudo apt-get update
+yes | $install sublime-text-installer
+ls
+# sets up Git with your name
+git config --global user.name "Mostafa Mahmoud"
+
+# sets up Git with your email
+git config --global user.email "gmelkabany@gmail.com"
+
+# makes sure that Git output is colored
+git config --global color.ui auto
+
+# displays the original state in a conflict
+git config --global merge.conflictstyle diff3
+
+git config --list
+
+git config --global core.editor "'/Applications/Sublime Text 2.app/Contents/SharedSupport/bin/subl' -n -w"
+
+
+
+
+
+
+
+#python libraries with pip:
+
+pip install sklearn
+pip install numpy
+
+subl
