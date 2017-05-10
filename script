@@ -12,7 +12,7 @@ sudo apt-get update
 
 install='sudo apt-get install'
 
-
+yes | $install git
 yes | $install python-pip
 yes | $install nodejs
 yes | $install npm
