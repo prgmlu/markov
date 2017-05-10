@@ -4,8 +4,8 @@
 #bash script
 #but running it after doing those:
 #
-#sudo apt-add-repository universe
-#sudo apt-update
+sudo apt-add-repository universe
+sudo apt-get update
 #git
 
 #(git clone )
@@ -13,7 +13,7 @@
 install='sudo apt-get install'
 
 
-yes | $install pip
+yes | $install python-pip
 yes | $install nodejs
 yes | $install npm
 #yes | $install r-base
