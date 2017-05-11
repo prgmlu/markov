@@ -20,6 +20,7 @@ yes | $install git
 yes | $install python-pip
 yes | $install nodejs
 yes | $install npm
+yes | $install ubuntu- restricted- extras
 #yes | $install r-base
 
 
