@@ -5,6 +5,10 @@
 #but running it after doing those:
 #
 sudo apt-add-repository universe
+sudo apt-add-repository restricted
+sudo apt-add-repository multiverse
+sudo apt-add-repository indepedent
+
 sudo apt-get update
 #git
 
