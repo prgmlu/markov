@@ -9,6 +9,9 @@ sudo apt-add-repository restricted
 sudo apt-add-repository multiverse
 sudo apt-add-repository indepedent
 
+curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash -
+sudo apt-get install -y nodejs
+
 sudo apt-get update
 #git
 
@@ -18,12 +21,12 @@ install='sudo apt-get install'
 
 yes | $install git
 yes | $install python-pip
-yes | $install nodejs
 yes | $install npm
 yes | $install ubuntu- restricted- extras
 #yes | $install r-base
-ln -s /usr/bin/nodejs /usr/bin/node
-cd
+#ln -s /usr/bin/nodejs /usr/bin/node
+#that's useful to create a symbolic link to nodejs
+#cd
 
 
 echo | sudo add-apt-repository ppa:webupd8team/sublime-text-3
